@@ -36,6 +36,14 @@ services:
       - backend
     networks:
       - devops-network
+  certbot:
+    image: certbot/certbot
+    container_name: devops-certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - devops-network
 
 volumes:
   postgres-data:
