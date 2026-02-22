@@ -46,6 +46,6 @@ app.get("/mensajes", async (req, res) => {
     res.json(resultado.rows)
 })
 
-app.listen(puerto, () => {
+app.listen(puerto, '0.0.0.0',() => {
     console.log('El servidor esta escuchando el puerto ' + puerto)
 })
