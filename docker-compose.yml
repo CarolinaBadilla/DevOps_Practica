@@ -1,26 +1,21 @@
 version: "3.9"
 
 services:
-  backend:
-    build: .
-    container_name: devops-backend
-    ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-      - DB_HOST=database
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=devopsdb
-    depends_on:
-      - database
-    networks:
-      - devops-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
+ backend:
+  build: .
+  container_name: devops-backend
+  ports:
+    - "3000:3000"
+  environment:
+    - DB_HOST=database
+    - DB_USER=postgres
+    - DB_PASSWORD=postgres
+    - DB_NAME=devopsdb
+  depends_on:
+    database:
+      condition: service_healthy
+  networks:
+    - devops-network
 
   database:
     image: postgres:15
