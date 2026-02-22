@@ -25,6 +25,18 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - devops-network
+  
+  nginx:
+    image: nginx:latest
+    container_name: devops-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+    networks:
+      - devops-network
 
 volumes:
   postgres-data:
